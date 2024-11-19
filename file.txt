@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Employees>
+    <Employee>
+        <ID>678</ID>
+        <Name>John Smith</Name>
+        <Branch Department="Customer">Downtown</Branch>
+        <Position>Teller</Position>
+        <Years>8</Years>
+        <Specialization>Finance</Specialization>
+    </Employee>
+    <Employee>
+        <ID>783</ID>
+        <Name>Sarah Johnson</Name>
+        <Branch Department="Loans">Uptown</Branch>
+        <Position>Loan Officer</Position>
+        <Years>10</Years>
+        <Specialization>Accounting</Specialization>
+    </Employee>
+    <Employee>
+        <ID>563</ID>
+        <Name>David Lee</Name>
+        <Branch Department="Investments">Westside</Branch>
+        <Position>Financial Advisor</Position>
+        <Years>6</Years>
+        <Specialization>Investment Banking</Specialization>
+    </Employee>
+    <Employee>
+        <ID>983</ID>
+        <Name>Emily Wong</Name>
+        <Branch Department="Risk Management">East End</Branch>
+        <Position>Risk Analyst</Position>
+        <Years>4</Years>
+        <Specialization>Economics</Specialization>
+    </Employee>
+    <Employee>
+        <ID>234</ID>
+        <Name>Michael Brown</Name>
+        <Branch Department="Operations">Northside</Branch>
+        <Position>Operations Manager</Position>
+        <Years>12</Years>
+        <Specialization>Management</Specialization>
+    </Employee>
+    <Employee>
+        <ID>700</ID>
+        <Name>Jennifer Chen</Name>
+        <Branch Department="IT">Central</Branch>
+        <Position>IT Specialist</Position>
+        <Years>2</Years>
+        <Specialization>Data Science</Specialization>
+    </Employee>
+    <Employee>
+        <ID>723</ID>
+        <Name>Daniel Garcia</Name>
+        <Branch Department="Marketing">Southside</Branch>
+        <Position>Marketing Officer</Position>
+        <Years>4</Years>
+        <Specialization>Marketing</Specialization>
+    </Employee>
+</Employees>
+
+HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Employee Record</title>
+</head>
+<body>
+
+<h2>Update Employee Record for Sarah Johnson</h2>
+
+<script>
+// Load and parse the XML
+function loadXMLDoc(filename) {
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("GET", filename, false);
+    xhttp.send();
+    return xhttp.responseXML;
+}
+
+function updateEmployeeData() {
+    let xmlDoc = loadXMLDoc("Q01_a_ICT00X.xml"); // Replace X with your registration number
+
+    // Find the Employee element by Name
+    let employees = xmlDoc.getElementsByTagName("Employee");
+    for (let i = 0; i < employees.length; i++) {
+        let name = employees[i].getElementsByTagName("Name")[0].childNodes[0].nodeValue;
+        if (name === "Sarah Johnson") {
+            // Update Position to "Senior Loan Officer"
+            employees[i].getElementsByTagName("Position")[0].childNodes[0].nodeValue = "Senior Loan Officer";
+            
+            // Update Years to "9"
+            employees[i].getElementsByTagName("Years")[0].childNodes[0].nodeValue = "9";
+        }
+    }
+
+    // Display updated XML in the console
+    console.log(new XMLSerializer().serializeToString(xmlDoc));
+}
+
+// Call the function to update the data
+updateEmployeeData();
+</script>
+
+</body>
+</html>
